@@ -1,3 +1,5 @@
+
+
 export default function CardQuizz() {
   return (
     <div className="card w-96 bg-base-100 shadow-xl gap-2 m-5">
@@ -19,4 +21,5 @@ export default function CardQuizz() {
       </div>
     </div>
   );
+  
 }
