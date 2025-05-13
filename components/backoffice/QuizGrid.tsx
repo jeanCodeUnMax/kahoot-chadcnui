@@ -1,6 +1,6 @@
 // components/QuizGrid.jsx
 import { Row, Col } from 'react-bootstrap';
-import QuizCard from './QuizCard';
+import QuizCard from './backoffice/QuizCard';
 
 export default function QuizGrid() {
   // Tableau pour 6 cartes (3x2)

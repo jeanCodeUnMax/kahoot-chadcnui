@@ -1,6 +1,7 @@
 'use client';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function BackOfficeLayout({
   children,
@@ -32,7 +33,10 @@ export default function BackOfficeLayout({
           <h4>Menu</h4>
           <ul className="nav flex-column">
             <li className="nav-item">
-              <a className="nav-link" href="/backoffice">Dashboard</a>
+              <Link className="nav-link" href="/backoffice/editor">Éditeur</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" href="/backoffice/editor">Éditeur</Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/backoffice/quiz">Mes Quiz</a>

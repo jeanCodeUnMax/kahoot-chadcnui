@@ -1,29 +1,22 @@
 // app/backoffice/page.jsx
-'use client';
+"use client";
 
-import { Row, Col } from 'react-bootstrap';
-import Sidebar from '../components/Sidebar';
-import QuizGrid from '../components/QuizGrid';
-import CreateButton from '../components/CreateButton';
-import ContextMenu from '@/components/ContextMenu';
+import { Row, Col } from "react-bootstrap";
+import QuizCard from "@/components/backoffice/QuizCard";
 
 export default function BackOfficePage() {
-  return (
 
-      <div className="position-relative">
-        <Row>
-          <Col md={2}>
-            <Sidebar />
+  const cards = [1, 2, 3, 4, 5, 6];
+
+  return (
+    <>
+      <Row>
+        {cards.map((item) => (
+          <Col key={item} md={4}>
+            <QuizCard />
           </Col>
-          <Col md={10}>
-            <div className="d-flex justify-content-end mb-3">
-              <CreateButton />
-            </div>
-            <QuizGrid />
-          </Col>
-        </Row>
-        <ContextMenu />
-      </div>
-   
+        ))}
+      </Row>
+    </>
   );
 }
