@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id Int @id @default(autoincrement())
+  username String @unique
+  email String @unique
+  password String
+  userResponse UserResponse[]
+  sessionGame SessionQuizz[] @relation("sessionParticipants")
+  sessionPresenter SessionQuizz[] @relation("sessionPresenter")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+}
+
+model Quizz {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  questions Question[]
+  sessionQuizz SessionQuizz[]
+ 
+}
+model Question {
+  id Int @id @default(autoincrement())
+  timeMax Int
+  scoreMax Int
+  scoreMin Int
+  question String
+  explication String
+  quizz Quizz @relation(fields: [quizzId], references: [id])
+  quizzId Int
+  answers Answer[]
+  userResponse UserResponse[]
+}
+
+model Answer {
+  id Int @id @default(autoincrement())
+  isGoodAnswers Boolean
+  name String
+  question Question @relation(fields: [questionId], references: [id])
+  questionId Int
+  userResponse UserResponse[]
+}
+
+model SessionQuizz {
+  id Int @id @default(autoincrement())
+  quizz Quizz @relation(fields: [quizzId], references: [id])
+  quizzId Int
+  participants User[] @relation("sessionParticipants")
+  presenter User @relation("sessionPresenter", fields: [presenterId], references: [id])
+  presenterId Int 
+  userResponse UserResponse[]
+  
+}
+
+model UserResponse {
+  id Int @id @default(autoincrement())
+  question Question @relation(fields: [questionId], references: [id])
+  questionId Int @unique
+  answer Answer @relation(fields: [answerId], references: [id])
+  answerId Int
+  sessionQuizz SessionQuizz @relation(fields: [sessionQuizzId], references: [id])
+  sessionQuizzId Int @unique
+  score Int
+  responseTime Float
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  
+}
+
