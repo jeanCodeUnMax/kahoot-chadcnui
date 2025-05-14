@@ -1,7 +1,9 @@
 // components/QuizCard.jsx
+import { User } from "@/models";
 import { Card } from "react-bootstrap";
 
 export default function QuizCard() {
+
   return (
     <Card className="mb-3">
       <Card.Img variant="top" src="https://loremflickr.com/320/240/cat" alt="Le game" />
